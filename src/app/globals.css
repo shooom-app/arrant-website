@@ -2,5 +2,159 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
-/* Body styles moved to layout body class to avoid @apply issues */
+/* Global Typography & Color System */
+@layer base {
+  body {
+    @apply font-sans text-neutral-100 antialiased leading-relaxed;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white font-bold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)];
+  }
+  
+  p {
+    @apply text-neutral-200;
+  }
+  
+  a {
+    @apply transition-colors;
+  }
+}
+
+/* Apple-like wave animations for hero text */
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+.animation-delay-800 {
+  animation-delay: 800ms;
+}
+
+/* Underline appearance animation */
+@keyframes underlineAppear {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.animate-underlineAppear {
+  animation: underlineAppear 1s ease-out forwards;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Disable hover transforms and animations */
+  .hover\:scale-\[1\.03\]:hover,
+  .hover\:scale-105:hover,
+  .hover\:translate-y-\[-1px\]:hover,
+  .hover\:translate-x-1:hover {
+    transform: none !important;
+  }
+  
+  /* Disable image hover zoom */
+  .hover\:scale-105:hover {
+    transform: none !important;
+  }
+  
+  /* Disable wave animations */
+  .animate-slideInLeft {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+html, body { 
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure main content starts at the very top */
+main {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* BackgroundFX animation */
+@keyframes bg-drift {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(2%, -1%, 0) scale(1.02); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+.bg-drift { animation: bg-drift 26s ease-in-out infinite; }
+[data-reduce-motion] .bg-drift { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .bg-drift { animation: none !important; } }
+
+/* Cinematic smoke animations */
+@keyframes smokeA {
+  0%   { transform: translate3d(-4%, -3%, 0) scale(1); }
+  50%  { transform: translate3d(3%, 2%, 0) scale(1.06); }
+  100% { transform: translate3d(-4%, -3%, 0) scale(1); }
+}
+@keyframes smokeB {
+  0%   { transform: translate3d(5%, 4%, 0) scale(1); }
+  50%  { transform: translate3d(-2%, -3%, 0) scale(1.07); }
+  100% { transform: translate3d(5%, 4%, 0) scale(1); }
+}
+@keyframes rimRed {
+  0%   { transform: translate3d(-2%, 1%, 0) scale(1); }
+  50%  { transform: translate3d(1%, -1%, 0) scale(1.04); }
+  100% { transform: translate3d(-2%, 1%, 0) scale(1); }
+}
+@keyframes rimGreen {
+  0%   { transform: translate3d(2%, -1%, 0) scale(1); }
+  50%  { transform: translate3d(-1%, 1%, 0) scale(1.04); }
+  100% { transform: translate3d(2%, -1%, 0) scale(1); }
+}
+
+.animate-smokeA  { animation: smokeA 34s ease-in-out infinite; }
+.animate-smokeB  { animation: smokeB 42s ease-in-out infinite; }
+.animate-rimRed  { animation: rimRed 46s ease-in-out infinite; }
+.animate-rimGreen{ animation: rimGreen 52s ease-in-out infinite; }
