@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import BackgroundFX from "@/app/components/BackgroundFX";
 import Footer from "@/components/Footer";
-import ActionBar from "@/components/ActionBar";
-import StickyQuoteCTA from "@/components/StickyQuoteCTA";
+// import ActionBar from "@/components/ActionBar";
+// import StickyQuoteCTA from "@/components/StickyQuoteCTA";
 // import SmokeyBackground from "@/components/SmokeyBackground";
 
 export const metadata: Metadata = {
@@ -20,8 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
-        <ActionBar />
-        <StickyQuoteCTA />
+        {/* <ActionBar /> */}
+        {/* <StickyQuoteCTA /> */}
       </body>
     </html>
   );
