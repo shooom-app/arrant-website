@@ -105,6 +105,15 @@
   }
 }
 
+/* Allow marquee animation to run even when reduced-motion is enabled */
+@media (prefers-reduced-motion: reduce) {
+  .arrant-allow-motion, .arrant-allow-motion * {
+    animation-duration: var(--loop-duration, 32s) !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: linear !important;
+  }
+}
+
 html, body { 
   height: 100%; 
   margin: 0;
@@ -158,3 +167,33 @@ main {
 .animate-smokeB  { animation: smokeB 42s ease-in-out infinite; }
 .animate-rimRed  { animation: rimRed 46s ease-in-out infinite; }
 .animate-rimGreen{ animation: rimGreen 52s ease-in-out infinite; }
+
+/* ===== Trust loop (global, Tailwind-safe) ===== */
+@layer utilities {
+  @keyframes trust-marquee {
+    0%   { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(-50%,0,0); }
+  }
+  .trust-run {
+    animation: trust-marquee var(--trustDur, 32s) linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+  .trust-paused { animation-play-state: paused; }
+
+  /* Edge fade to keep hover scale inside bounds */
+  .trust-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+
+  /* ✅ Pause the animation whenever the wrapper is hovered/focused or marked paused */
+  .trust-wrap:hover .trust-run,
+  .trust-wrap:focus-within .trust-run,
+  .trust-wrap[data-paused="true"] .trust-run {
+    animation-play-state: paused !important;
+  }
+}
+
+

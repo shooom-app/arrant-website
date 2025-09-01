@@ -1,12 +1,12 @@
 export default function Footer() {
   return (
     <footer className="mt-20 bg-black/50 backdrop-blur-sm border-t border-white/10">
-      <div className="mx-auto max-w-wrap px-6 py-12 grid gap-8 md:grid-cols-3 text-sm">
+      <div className="mx-auto max-w-wrap px-6 py-12 grid gap-8 md:gap-16 md:grid-cols-3 text-sm">
         <div>
           <div className="font-semibold text-white group cursor-pointer transition-all duration-300 ease-out hover:text-[#47CE0C]">
             Arrant Solutions
           </div>
-          <p className="mt-2 text-neutral-300">Heavy haul & energy support services.</p>
+          <p className="mt-2 text-neutral-300">Heavy-haul & superload transportation.</p>
         </div>
         <div>
           <div className="font-semibold text-white group cursor-pointer transition-all duration-300 ease-out hover:text-[#47CE0C]">
