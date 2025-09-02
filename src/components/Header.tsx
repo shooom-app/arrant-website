@@ -34,7 +34,7 @@ export default function Header() {
               }`}
             >
               {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#CD1516] via-red-600 to-[#47CE0C] transition-all duration-500 ease-out group-hover:w-full rounded-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] transition-all duration-500 ease-out group-hover:w-full rounded-full"></span>
             </Link>
           ))}
         </div>
@@ -42,10 +42,10 @@ export default function Header() {
         {/* CTA button */}
         <Link
           href="/quote"
-          className="group relative overflow-hidden rounded-lg bg-gradient-to-r from-[#CD1516] to-[#47CE0C] px-4 py-2 font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-lg"
+          className="group relative overflow-hidden rounded-lg bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] px-4 py-2 font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-lg"
         >
           <span className="relative z-10">Get quote</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#47CE0C] to-[#CD1516] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#47CE0C] via-white/30 to-[#CD1516] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"></div>
         </Link>
       </nav>
     </header>

@@ -104,6 +104,20 @@ export default function CaseStudy() {
                 <div>Delivered on time, zero incidents.</div>
               </div>
             </div>
+
+            {/* Action row */}
+            <div className="relative z-10 mt-6 flex justify-center">
+              <a
+                href="/quote"
+                className="group relative overflow-hidden rounded-lg bg-transparent px-6 py-3 text-lg font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-500 ease-out hover:scale-[1.05] hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] focus:outline-none focus:ring-2 focus:ring-white/30"
+              >
+                {/* base gradient layer: red -> soft white -> green */}
+                <span className="pointer-events-none absolute inset-0 z-0 rounded-lg opacity-85 blur-[2px] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)]" />
+                <span className="relative z-20">Request Something Similar</span>
+                {/* hover overlay reversed order with same softness */}
+                <div className="pointer-events-none absolute inset-0 z-0 rounded-lg bg-gradient-to-r from-[#47CE0C] via-[rgba(255,255,255,.45)] to-[#CD1516] opacity-0 blur-[2px] transition-all duration-500 ease-out group-hover:opacity-85" />
+              </a>
+            </div>
           </article>
         </div>
       </div>
