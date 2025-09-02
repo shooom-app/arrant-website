@@ -6,6 +6,8 @@
  */
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV !== "production";
+
 const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -16,9 +18,10 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       "img-src 'self' data: blob:",
-      "script-src 'self' 'unsafe-inline'",
+      // Allow inline during development and Next dev client websocket/eval
+      `script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval'" : ""}`.trim(),
       "style-src 'self' 'unsafe-inline'",
-      "connect-src 'self'",
+      `connect-src 'self' ${isDev ? "ws:" : ""}`.trim(),
       "form-action 'self'",
       "frame-ancestors 'none'",
       "base-uri 'self'",

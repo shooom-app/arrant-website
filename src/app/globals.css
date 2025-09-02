@@ -188,9 +188,7 @@ main {
             mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
   }
 
-  /* ✅ Pause the animation whenever the wrapper is hovered/focused or marked paused */
-  .trust-wrap:hover .trust-run,
-  .trust-wrap:focus-within .trust-run,
+  /* ✅ Pause only when wrapper is explicitly marked paused (e.g., press) */
   .trust-wrap[data-paused="true"] .trust-run {
     animation-play-state: paused !important;
   }

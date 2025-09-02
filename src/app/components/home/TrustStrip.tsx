@@ -8,17 +8,41 @@ const ITEMS = [
   "RMIS Verified",
   "Insurance to $5M",
   "Zero-Incident Record",
+  "IRP / IFTA Compliant",
+  "Permits & Escorts In-House",
 ];
 
 export default function TrustStrip() {
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const [duration, setDuration] = useState<string>("18s");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     }
   }, []);
+
+  // Make the loop noticeably faster on small screens where items appear larger
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const compute = () => {
+      const w = window.innerWidth;
+      // Respect reduced motion: run slower but still smooth
+      if (reduced) {
+        setDuration("40s");
+        return;
+      }
+      // Speed up on small screens for a snappier feel and to avoid perceived stalls
+      // previous: <400 => 9s, <640 => 10s, <1024 => 13s, else 16s
+      // new:      <400 => 7s, <640 => 8s,  <1024 => 12s, else 15s
+      const next = w < 400 ? "7s" : w < 640 ? "8s" : w < 1024 ? "12s" : "15s";
+      setDuration(next);
+    };
+    compute();
+    window.addEventListener("resize", compute, { passive: true });
+    return () => window.removeEventListener("resize", compute);
+  }, [reduced]);
 
   // A + A for seamless loop
   const LOOP = useMemo(() => [...ITEMS, ...ITEMS], []);
@@ -29,10 +53,6 @@ export default function TrustStrip() {
         {/* Extra vertical space + edge mask so hover never looks cramped or clips */}
         <div
           className="trust-wrap trust-mask overflow-hidden py-5 sm:py-7"
-          onPointerEnter={() => setPaused(true)}
-          onPointerLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
-          onBlur={() => setPaused(false)}
           onPointerDown={() => setPaused(true)}
           onPointerUp={() => setPaused(false)}
           data-paused={paused ? "true" : "false"}
@@ -41,7 +61,7 @@ export default function TrustStrip() {
           <div
             data-testid="trust-track"
             className={["flex", "trust-run", "cursor-default"].join(" ")}
-            style={{ "--trustDur": reduced ? "60s" : "32s" } as React.CSSProperties}
+            style={{ "--trustDur": duration } as React.CSSProperties}
             role="list"
             aria-live="polite"
           >
