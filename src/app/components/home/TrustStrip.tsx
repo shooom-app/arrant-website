@@ -64,8 +64,7 @@ export default function TrustStrip() {
           </div>
         </div>
       </div>
-      {/* Subtle hero-accent hairline (softer) */}
-      <div className="pointer-events-none absolute inset-x-0 -bottom-px mx-auto h-px max-w-7xl bg-gradient-to-r from-[#CD1516]/40 via-white/10 to-[#47CE0C]/40" />
+      {/* Divider moved to global SectionDivider; remove local hairline to avoid double lines */}
     </section>
   );
 }

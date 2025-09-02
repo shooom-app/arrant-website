@@ -1,6 +1,21 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { FileSearch } from "lucide-react";
+
+function IconPuck({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="relative inline-flex items-center justify-center" aria-hidden="true">
+      <span className="pointer-events-none absolute inset-0 rounded-full opacity-80 blur-[2px]" style={{ background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.55),#47CE0C)", transform: "scale(1.12)" }} />
+      <span className="relative block rounded-full bg-white/10 ring-1 ring-white/15" style={{ width: 56, height: 56 }}>
+        <span className="absolute inset-0 rounded-full bg-gradient-to-b from-white/10 to-white/0" />
+        <span className="relative flex h-full w-full items-center justify-center text-white/90">
+          {children}
+        </span>
+      </span>
+    </span>
+  );
+}
 
 export default function CaseStudy() {
   const rootRef = useRef<HTMLElement | null>(null);
@@ -40,61 +55,38 @@ export default function CaseStudy() {
       aria-labelledby="case-study"
     >
       <div className="mx-auto max-w-7xl px-4 py-6 sm:py-12">
-        {/* Header matching Why Arrant */}
-        <div className="cs-header mx-auto max-w-3xl text-center will-change-transform">
-          <h2 id="case-study" className="text-2xl font-bold leading-7 text-white sm:text-3xl sm:leading-tight">
-            Recent Project Spotlight — Proven Execution
-          </h2>
-          <p className="mt-2 text-sm text-white/85 sm:text-base">
-            Colorado · Texas · 7 days · 12’ wide · 135,000 lbs
-          </p>
-          <div className="mx-auto mt-4 h-[2px] w-24 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-70 sm:w-36 sm:opacity-80" />
-        </div>
-
-        {/* Centered grid container */}
-        <div className="mx-auto mt-6 grid max-w-6xl grid-cols-1 items-stretch justify-center gap-6 sm:mt-8 md:grid-cols-2 md:gap-8">
-          {/* Media card (glass + hairline, with vignette) */}
-          <div className="cs-media relative h-full min-h-[420px] overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)] transition hover:ring-white/20 hover:shadow-[0_18px_70px_rgba(0,0,0,0.38)] will-change-transform md:min-h-[520px]">
-            <span className="why-hairline pointer-events-none absolute inset-x-0 -top-px h-[2px]" />
-            {/* Keep 16:9 on mobile; on desktop, let it fill the column height */}
-            <div className="relative aspect-video h-full w-full md:aspect-auto md:h-full">
-              {/* Subtle top+bottom vignette */}
-              <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.18),transparent_24%),linear-gradient(to_top,rgba(0,0,0,0.22),transparent_24%)] sm:bg-[radial-gradient(120%_80%_at_50%_40%,transparent_40%,rgba(0,0,0,0.45)_100%)]" />
-              <Image
-                src="/case-study-mobile.jpg"
-                alt="13‑axle RGN hauling 135,000‑lb battery unit from Colorado to Texas"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 480px) 100vw, (min-width: 768px) 50vw, 100vw"
-                priority={false}
-              />
-            </div>
-          </div>
-
-          {/* Details card (glass + hairline) */}
+        {/* Centered single container */}
+        <div className="mx-auto mt-4 max-w-3xl">
           <article
-            className="cs-details relative h-full min-h-[420px] rounded-2xl bg-white/5 p-5 ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)] transition hover:ring-white/20 hover:shadow-[0_18px_70px_rgba(0,0,0,0.38)] will-change-transform sm:p-8 md:min-h-[520px]"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "600px" } as React.CSSProperties}
+            className="relative overflow-hidden rounded-2xl bg-white/5 p-6 text-center ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)] sm:p-8"
           >
             <span className="why-hairline pointer-events-none absolute inset-x-0 -top-px h-[2px]" />
+            <span className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-[0.10] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)] blur-[6px]" />
 
-            {/* Centered gradient tag matching primary button */}
-            <div className="mb-4 flex justify-center">
+            {/* Icon */}
+            <div className="relative z-10 mb-4 flex justify-center">
+              <IconPuck>
+                <FileSearch width={24} height={24} strokeWidth={2} absoluteStrokeWidth className="text-white/90" />
+              </IconPuck>
+            </div>
+
+            {/* Tag */}
+            <div className="relative z-10 mb-4 flex justify-center">
               <span className="brand-chip inline-flex items-center rounded-full px-4 py-1 text-sm font-semibold text-white ring-1 ring-white/15">
-                Case Study
+                Case Study — Recent Project
               </span>
             </div>
 
-            {/* KPI chips as 2-col grid on mobile */}
-            <div className="cs-chips mt-1 grid grid-cols-2 gap-2 sm:mt-0 sm:flex sm:flex-wrap sm:gap-2">
+            {/* KPI chips */}
+            <div className="relative z-10 mx-auto grid max-w-xl grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-2">
               <span className="brand-chip inline-flex min-h-[40px] items-center justify-center rounded-full px-3 py-1 text-sm font-semibold text-white ring-1 ring-white/15">135,000 lbs</span>
               <span className="brand-chip inline-flex min-h-[40px] items-center justify-center rounded-full px-3 py-1 text-sm font-semibold text-white ring-1 ring-white/15">12’ wide</span>
               <span className="brand-chip inline-flex min-h-[40px] items-center justify-center rounded-full px-3 py-1 text-sm font-semibold text-white ring-1 ring-white/15">CO → TX</span>
               <span className="brand-chip inline-flex min-h-[40px] items-center justify-center rounded-full px-3 py-1 text-sm font-semibold text-white ring-1 ring-white/15">7 days</span>
             </div>
 
-            {/* Execution bullets as definition-list feel */}
-            <div className="mt-4 space-y-3 text-[15px] leading-relaxed text-white/85">
+            {/* Centered details */}
+            <div className="relative z-10 mt-5 space-y-3 text-[15px] leading-relaxed text-white/85">
               <div>
                 <div className="font-semibold text-white">Project</div>
                 <div>135,000 lbs battery unit (12’ wide)</div>
@@ -112,9 +104,6 @@ export default function CaseStudy() {
                 <div>Delivered on time, zero incidents.</div>
               </div>
             </div>
-
-            {/* Bottom hairline */}
-            <div className="cs-bottom-hairline mt-4 h-[2px] w-full origin-left scale-x-50 rounded-full bg-gradient-to-r from-[#CD1516] via-white/40 to-[#47CE0C] opacity-0" />
           </article>
         </div>
       </div>
