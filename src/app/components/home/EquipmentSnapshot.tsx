@@ -185,9 +185,9 @@ export default function EquipmentSnapshot() {
         <div className="mx-auto mb-8 h-[2px] w-24 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-70 sm:w-36" />
 
         <div className="mb-6 grid gap-4 sm:grid-cols-3">
-          <FleetStat label="Max Weight" unit="lbs" target={147000} start={start} delayMs={0} />
-          <FleetStat label="Max Length" unit="ft" target={120} start={start} delayMs={120} />
-          <FleetStat label="Max Width" unit="ft" target={14} start={start} delayMs={240} />
+          <FleetStat label="Max Weight" unit="lbs" target={165000} start={start} delayMs={0} />
+          <FleetStat label="Max Length" unit="ft" target={143} start={start} delayMs={120} />
+          <FleetStat label="Max Width" unit="ft" target={20} start={start} delayMs={240} />
         </div>
 
         <hr className="my-6 border-white/10" />
