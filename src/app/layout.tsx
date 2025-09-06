@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import BackgroundFX from "@/app/components/BackgroundFX";
 import Footer from "@/components/Footer";
+import "@fontsource-variable/inter";
+import LoaderBoundary from "@/components/loader/LoaderBoundary";
 // import ActionBar from "@/components/ActionBar";
 // import StickyQuoteCTA from "@/components/StickyQuoteCTA";
 // import SmokeyBackground from "@/components/SmokeyBackground";
@@ -18,7 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-transparent text-brand-text antialiased">
         <BackgroundFX />
         <Header />
-        {children}
+        <LoaderBoundary variant="svg">
+          {children}
+        </LoaderBoundary>
         <Footer />
         {/* <ActionBar /> */}
         {/* <StickyQuoteCTA /> */}

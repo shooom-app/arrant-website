@@ -17,8 +17,11 @@
     "security:audit": "npm audit --omit=dev"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.6",
     "@hookform/resolvers": "^5.2.1",
+    "@rive-app/react-canvas": "^4.23.3",
     "framer-motion": "^11.18.2",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.542.0",
     "next": "15.5.1",
     "react": "19.1.0",
