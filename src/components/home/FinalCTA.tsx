@@ -15,6 +15,7 @@ export default function FinalCTA() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/quote"
+              prefetch
               className="rounded-xl bg-[#CD1516] px-5 py-3 text-white font-semibold shadow-lg shadow-black/30 transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30"
             >
               Get instant quote

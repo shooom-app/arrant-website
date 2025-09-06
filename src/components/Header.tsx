@@ -43,6 +43,7 @@ export default function Header() {
             <Link
               key={item}
               href={`/${item.toLowerCase()}`}
+              prefetch
               className={`relative group transition-all duration-300 ease-out hover:translate-y-[-1px] ${scrolled ? "text-white/90" : "text-white"}`}
             >
               {item}
@@ -83,6 +84,7 @@ export default function Header() {
             <Link 
               key={item} 
               href={`/${item.toLowerCase()}`} 
+              prefetch
               className={`relative group transition-all duration-300 ease-out hover:translate-y-[-1px] ${scrolled ? "text-white/90" : "text-white"}`}
             >
               {item}
@@ -92,6 +94,7 @@ export default function Header() {
           {scrolled && (
             <Link
               href="/quote"
+              prefetch
               className="hidden md:inline-block group relative overflow-hidden rounded-lg bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] px-4 py-2 font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-lg"
             >
               <span className="relative z-10">Get quote</span>
@@ -103,6 +106,7 @@ export default function Header() {
         {/* Mobile CTA top-right */}
         <Link
           href="/quote"
+          prefetch
           className="md:hidden absolute right-4 top-1/2 -translate-y-1/2 group overflow-hidden rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] px-3.5 py-1.5 text-[13px] font-semibold text-white shadow-[0_6px_18px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-lg"
         >
           <span className="relative z-10">Get quote</span>
@@ -120,6 +124,7 @@ export default function Header() {
                 <Link
                   key={item}
                   href={`/${item.toLowerCase()}`}
+                  prefetch
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-between px-4 py-3 text-[15px] text-white transition-colors hover:bg-white/10"
                 >
@@ -131,6 +136,7 @@ export default function Header() {
             <div className="p-3">
               <Link
                 href="/quote"
+                prefetch
                 onClick={() => setMenuOpen(false)}
                 className="group relative mx-auto block w-full max-w-xs overflow-hidden rounded-lg bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] px-5 py-2.5 text-center font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
               >

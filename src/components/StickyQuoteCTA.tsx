@@ -11,6 +11,7 @@ export default function StickyQuoteCTA() {
       <div className="flex gap-2 rounded-2xl bg-black/40 p-2 backdrop-blur-md ring-1 ring-white/10">
         <Link
           href="/quote"
+          prefetch
           className="flex-1 rounded-xl bg-[#CD1516] px-4 py-3 text-center text-white font-semibold shadow-lg shadow-black/30 active:scale-[0.99]"
           aria-label="Get instant quote"
         >

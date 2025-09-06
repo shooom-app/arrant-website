@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -32,14 +33,16 @@ export default function Hero() {
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-5 animate-slideInLeft animation-delay-400">
           {/* Primary CTA with gradient sheen sweep */}
-          <a
+          <Link
             href="/quote"
+            prefetch
             className="group relative overflow-hidden rounded-lg bg-transparent px-6 py-3 text-lg font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-500 ease-out hover:scale-[1.05] hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] focus:outline-none focus:ring-2 focus:ring-white/30]"
           >
             <span className="pointer-events-none absolute inset-0 z-0 rounded-lg opacity-85 blur-[2px] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)]" />
             <span className="relative z-20">Get instant quote</span>
             <div className="pointer-events-none absolute inset-0 z-0 rounded-lg bg-gradient-to-r from-[#47CE0C] via-[rgba(255,255,255,.45)] to-[#CD1516] opacity-0 blur-[2px] transition-all duration-500 ease-out group-hover:opacity-85"></div>
-          </a>
+            
+          </Link>
           
           {/* Secondary CTA with glass background and twin brand ring shadow */}
           <a
