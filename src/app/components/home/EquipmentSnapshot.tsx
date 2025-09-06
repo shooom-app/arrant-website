@@ -77,9 +77,9 @@ function useStartOnce<T extends HTMLElement>() {
     return () => {
       ioRef.current?.disconnect();
       if (timerRef.current) clearTimeout(timerRef.current);
-      window.removeEventListener("scroll", checkNow as any);
-      window.removeEventListener("resize", checkNow as any);
-      window.removeEventListener("load", checkNow as any);
+      window.removeEventListener("scroll", checkNow);
+      window.removeEventListener("resize", checkNow);
+      window.removeEventListener("load", checkNow);
     };
   }, [checkNow]);
 

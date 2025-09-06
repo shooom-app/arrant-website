@@ -13,7 +13,7 @@ type Pillar = {
   chip: string;
   title: string;
   body: string;
-  Icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  Icon: (props: React.SVGProps<SVGSVGElement>) => React.ReactElement;
   proofs: string[];
 };
 

@@ -11,36 +11,76 @@ export default function LoaderBoundary({ children, variant = "svg" as const }: {
   const [show, setShow] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const delayRef = useRef<number | null>(null);
-  const minRef = useRef<number | null>(null);
   const failsafeRef = useRef<number | null>(null);
+  const isFirstLoadRef = useRef<boolean>(true);
+  const completeRef = useRef<number | null>(null);
+  const idleRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Immediately show loader on navigation (no delay) and ensure it stays at least 700ms
+    // Skip showing the loader on the very first render to avoid flash-after-content
+    if (isFirstLoadRef.current) {
+      isFirstLoadRef.current = false;
+      return;
+    }
+
+    // Clear timers
     if (delayRef.current) clearTimeout(delayRef.current);
-    if (minRef.current) clearTimeout(minRef.current);
     if (failsafeRef.current) clearTimeout(failsafeRef.current);
+    if (completeRef.current) clearTimeout(completeRef.current);
+    if (idleRef.current) {
+      // cancel idle callback
+      const win = window as Window & {
+        requestIdleCallback?: (cb: (deadline: IdleDeadline) => void, opts?: { timeout?: number }) => number;
+        cancelIdleCallback?: (id: number) => void;
+      };
+      if (typeof win.cancelIdleCallback === "function") win.cancelIdleCallback(idleRef.current);
+      else clearTimeout(idleRef.current);
+      idleRef.current = null;
+    }
 
-    setShow(true);
-    setProgress(0);
-    // Simulate smooth progress for UX; replace with real signals when available
-    const startedAt = performance.now();
-    const tick = () => {
-      const elapsed = performance.now() - startedAt;
-      const pct = Math.min(1, elapsed / 1200); // ~1.2s to 100%
-      setProgress(pct);
-      if (pct < 1 && show) requestAnimationFrame(tick);
+    // Heuristic to avoid showing on fast navigations: if the browser reports idle before our delay, skip showing.
+    let shouldShow = true;
+    const win = window as Window & {
+      requestIdleCallback?: (cb: (deadline: IdleDeadline) => void, opts?: { timeout?: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
     };
-    requestAnimationFrame(tick);
+    if (typeof win.requestIdleCallback === "function") {
+      idleRef.current = win.requestIdleCallback(() => { shouldShow = false; }, { timeout: 220 });
+    } else {
+      idleRef.current = window.setTimeout(() => { shouldShow = false; }, 200);
+    }
 
-    // Minimum visible duration to prevent flash
-    minRef.current = window.setTimeout(() => setShow(false), 900);
+    // Delay showing to avoid flashes on fast navigations
+    delayRef.current = window.setTimeout(() => {
+      if (!shouldShow) return;
+      setShow(true);
+      setProgress(0);
+      const startedAt = performance.now();
+      const tick = () => {
+        const elapsed = performance.now() - startedAt;
+        const pct = Math.min(1, elapsed / 1400); // ~1.4s to 100%
+        setProgress(pct);
+        if (pct < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          // brief hold then fade out (handled inside ArrantLoader)
+          completeRef.current = window.setTimeout(() => setShow(false), 220);
+        }
+      };
+      requestAnimationFrame(tick);
+    }, 250);
     // Hard timeout safety
     failsafeRef.current = window.setTimeout(() => setShow(false), 10000);
 
     return () => {
       if (delayRef.current) clearTimeout(delayRef.current);
-      if (minRef.current) clearTimeout(minRef.current);
       if (failsafeRef.current) clearTimeout(failsafeRef.current);
+      if (completeRef.current) clearTimeout(completeRef.current);
+      if (idleRef.current) {
+        const win = window as Window & { cancelIdleCallback?: (id: number) => void };
+        if (typeof win.cancelIdleCallback === "function") win.cancelIdleCallback(idleRef.current);
+        else clearTimeout(idleRef.current);
+      }
     };
   }, [pathname]);
 

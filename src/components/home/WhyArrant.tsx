@@ -9,7 +9,7 @@ import { Truck, Users, Route, ShieldCheck } from "lucide-react";
 type Pillar = {
   title: string;
   body: string;
-  Icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  Icon: (props: React.SVGProps<SVGSVGElement>) => React.ReactElement;
 };
 
 function IconPuck({ children }: { children: React.ReactNode }) {
@@ -62,7 +62,7 @@ export default function WhyArrant() {
               {/* Row 1: centered icon puck */}
               <div className="relative z-10 mb-3 flex justify-center">
                 <IconPuck>
-                  <Icon width={20} height={20} strokeWidth={2} absoluteStrokeWidth className="text-white/90" />
+                  <Icon width={20} height={20} strokeWidth={2} className="text-white/90" />
                 </IconPuck>
               </div>
 

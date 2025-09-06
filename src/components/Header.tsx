@@ -58,6 +58,8 @@ export default function Header() {
               className="pointer-events-none absolute inset-0 rounded-full blur-[2px] transition-all duration-600"
               style={{ background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.55),#47CE0C)", transform: `translateZ(0) scale(${scrolled ? 1.1 : 1.25})`, opacity: scrolled ? 0.9 : 0, willChange: "transform, opacity" }}
             />
+            {/* Using <img> intentionally for an inline SVG logo with dynamic scaling; next/image is not necessary here */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/arrant_logo.svg"
               alt="Arrant Solutions"

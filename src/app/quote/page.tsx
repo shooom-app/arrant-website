@@ -3,7 +3,7 @@ export default function Quote() {
     <div className="mx-auto max-w-wrap px-6 py-16">
       <h1 className="text-3xl font-bold">Request a Quote</h1>
       <p className="mt-3 text-brand-dim">
-        We'll confirm permits, route, and pricing. You'll get a fast estimate range.
+        We&apos;ll confirm permits, route, and pricing. You&apos;ll get a fast estimate range.
       </p>
       <ul className="mt-6 text-sm list-disc pl-6 text-brand-dim">
         <li>Pickup & Drop-off (full addresses / ZIPs)</li>

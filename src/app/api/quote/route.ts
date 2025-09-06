@@ -8,11 +8,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });
   }
 
-  let body: any = {};
-  try { body = await req.json(); } catch { body = {}; }
+  let body: unknown = {};
+  try {
+    body = await req.json();
+  } catch {
+    body = {};
+  }
 
   // Honeypot: if bots fill this, silently accept & drop
-  if (typeof body?.website === "string" && body.website.length > 0) {
+  if (
+    typeof body === "object" && body !== null &&
+    "website" in body && typeof (body as Record<string, unknown>).website === "string" &&
+    ((body as Record<string, string>).website).length > 0
+  ) {
     return NextResponse.json({ ok: true });
   }
 
