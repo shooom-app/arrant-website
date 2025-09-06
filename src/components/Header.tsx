@@ -56,17 +56,19 @@ export default function Header() {
           <span className="relative inline-flex items-center justify-center will-change-transform">
             <span
               className="pointer-events-none absolute inset-0 rounded-full blur-[2px] transition-all duration-600"
-              style={{ background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.55),#47CE0C)", transform: `scale(${scrolled ? 1.1 : 1.25})`, opacity: scrolled ? 0.9 : 0 }}
+              style={{ background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.55),#47CE0C)", transform: `translateZ(0) scale(${scrolled ? 1.1 : 1.25})`, opacity: scrolled ? 0.9 : 0, willChange: "transform, opacity" }}
             />
             <img
               src="/arrant_logo.svg"
               alt="Arrant Solutions"
               className="w-auto relative z-10 group-hover:scale-[1.03]"
               style={{
-                height: scrolled ? 48 : 78,
+                height: 78,
                 transformOrigin: "center",
+                transform: `translateZ(0) scale(${scrolled ? 0.62 : 1})`,
                 filter: scrolled ? "brightness(0) invert(1)" : "none",
-                transition: "height 600ms cubic-bezier(0.2,0.6,0.2,1), transform 600ms cubic-bezier(0.2,0.6,0.2,1), filter 400ms ease"
+                willChange: "transform, filter",
+                transition: "transform 500ms cubic-bezier(0.2,0.6,0.2,1), filter 400ms ease"
               }}
             />
           </span>
