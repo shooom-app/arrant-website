@@ -1,0 +1,6 @@
+src/app/page.tsx
+src/components/GalleryCtaSection.tsx
+src/components/Header.tsx
+src/components/gallery/Gallery.tsx
+src/components/home/FinalCTA.tsx
+src/components/loader/LoaderBoundary.tsx

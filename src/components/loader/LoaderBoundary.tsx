@@ -84,6 +84,12 @@ export default function LoaderBoundary({ children, variant = "svg" as const }: {
     };
   }, [pathname]);
 
+  // Broadcast visibility changes so header can coordinate its entrance timing
+  useEffect(() => {
+    const ev = new CustomEvent("app:loader-visibility", { detail: { show } });
+    window.dispatchEvent(ev);
+  }, [show]);
+
   return (
     <>
       <ArrantLoader show={show} variant={variant} progress={progress} />

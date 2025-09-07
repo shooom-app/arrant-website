@@ -41,7 +41,7 @@ export default function FinalCTA() {
             >
               <span className="pointer-events-none absolute -inset-1 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{ background: "linear-gradient(120deg, rgba(205,21,22,0.22), rgba(255,255,255,0.10), rgba(71,206,12,0.22))" }} />
-              <span className="relative">Call dispatch 24/7</span>
+              <span className="relative">Call now</span>
             </a>
           </div>
         </div>

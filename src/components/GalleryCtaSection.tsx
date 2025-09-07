@@ -265,7 +265,7 @@ export default function GalleryCtaSection({
                   href="tel:+1-555-555-5555"
                   className="rounded-lg px-4 py-2 text-center font-medium text-white ring-1 ring-white/20 transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30"
                 >
-                  Call dispatch 24/7
+                  Call now
                 </a>
               </div>
             </div>

@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
+import { prefersReducedMotion } from "@/lib/media";
 import { Menu, X, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Header() {
   const [scrollProgress, setScrollProgress] = useState(0); // 0..1
   const [menuOpen, setMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
   useEffect(() => {
     let ticking = false;
     const maxRange = 160; // px over which header shrinks
@@ -23,6 +25,21 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Ensure header is visible after mount; optionally could be used to add light entrance
+  useEffect(() => {
+    const reduced = prefersReducedMotion();
+    if (!reduced) requestAnimationFrame(() => setVisible(true));
+
+    const onLoaderVisibility = (e: Event) => {
+      const detail = (e as CustomEvent<{ show: boolean }>).detail;
+      if (!detail) return;
+      // Keep header visible; do not hide on initial paint
+      if (detail.show === false) setVisible(true);
+    };
+    window.addEventListener("app:loader-visibility", onLoaderVisibility as EventListener);
+    return () => window.removeEventListener("app:loader-visibility", onLoaderVisibility as EventListener);
+  }, []);
   const scrolled = scrollProgress > 0.5;
 
   return (
@@ -32,7 +49,11 @@ export default function Header() {
         `bg-gradient-to-b from-black/35 to-black/5 backdrop-blur-xl fixed inset-x-0 top-0 z-20 overflow-visible`
       }
       style={{
-        height: Math.round(100 - 16 * scrollProgress)
+        height: Math.round(100 - 16 * scrollProgress),
+        opacity: visible ? 1 : 1,
+        transform: visible ? "translateY(0)" : "translateY(0)",
+        transition: "opacity 380ms ease, transform 380ms ease",
+        willChange: "opacity, transform"
       }}
     >
       <nav className="relative mx-auto flex h-full max-w-7xl items-center justify-center pl-14 pr-14 md:px-6 md:py-4">
