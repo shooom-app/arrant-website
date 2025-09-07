@@ -9,6 +9,10 @@ import { applySecurityHeaders } from "./src/lib/security/headers";
 
 export function middleware(_req: NextRequest) {
   const res = NextResponse.next();
+  // Disallow indexing of API routes
+  if (_req.nextUrl.pathname.startsWith("/api/")) {
+    res.headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
   return applySecurityHeaders(res);
 }
 

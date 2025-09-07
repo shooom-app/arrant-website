@@ -4,24 +4,38 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0); // 0..1
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    let ticking = false;
+    const maxRange = 160; // px over which header shrinks
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY || 0;
+        const p = Math.max(0, Math.min(1, y / maxRange));
+        setScrollProgress(p);
+        ticking = false;
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  const scrolled = scrollProgress > 0.5;
 
   return (
     <header
       className={
-        // Smooth height animation and constant gradient theme
-        `bg-gradient-to-b from-black/35 to-black/5 backdrop-blur-xl fixed inset-x-0 top-0 z-20 overflow-visible transition-[height] duration-500 ease-[cubic-bezier(0.2,0.6,0.2,1)]`
+        // Smooth constant gradient theme (drop height transition to avoid jank)
+        `bg-gradient-to-b from-black/35 to-black/5 backdrop-blur-xl fixed inset-x-0 top-0 z-20 overflow-visible`
       }
-      style={{ height: scrolled ? 96 : 104 }}
+      style={{
+        height: Math.round(100 - 16 * scrollProgress)
+      }}
     >
-      <nav className="relative mx-auto flex h-full max-w-7xl items-center justify-center px-4 md:px-6 md:py-4">
+      <nav className="relative mx-auto flex h-full max-w-7xl items-center justify-center pl-14 pr-14 md:px-6 md:py-4">
         {/* Mobile: hamburger (left) */}
         <button
           type="button"
@@ -38,7 +52,7 @@ export default function Header() {
         </button>
 
         {/* Left links (desktop only) */}
-        <div className="hidden md:flex flex-1 items-center justify-end gap-8 pr-8">
+        <div className="hidden md:flex flex-1 items-center justify-end gap-6 pr-6">
           {["Services", "Trailers", "States"].map((item) => (
             <Link
               key={item}
@@ -56,8 +70,8 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-3 group" style={{ transition: "transform 600ms cubic-bezier(0.2,0.6,0.2,1)" }}>
           <span className="relative inline-flex items-center justify-center will-change-transform">
             <span
-              className="pointer-events-none absolute inset-0 rounded-full blur-[2px] transition-all duration-600"
-              style={{ background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.55),#47CE0C)", transform: `translateZ(0) scale(${scrolled ? 1.1 : 1.25})`, opacity: scrolled ? 0.9 : 0, willChange: "transform, opacity" }}
+              className="pointer-events-none absolute inset-0 rounded-full blur-[2px]"
+              style={{ background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.55),#47CE0C)", transform: `translateZ(0) scale(${1.25 - (1.25 - 1.1) * scrollProgress})`, opacity: 0.9 * scrollProgress, willChange: "transform, opacity" }}
             />
             {/* Using <img> intentionally for an inline SVG logo with dynamic scaling; next/image is not necessary here */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -66,12 +80,11 @@ export default function Header() {
               alt="Arrant Solutions"
               className="w-auto relative z-10 group-hover:scale-[1.03]"
               style={{
-                height: 78,
+                height: 72,
                 transformOrigin: "center",
-                transform: `translateZ(0) scale(${scrolled ? 0.62 : 1})`,
+                transform: `translateZ(0) scale(${1 - (1 - 0.58) * scrollProgress})`,
                 filter: scrolled ? "brightness(0) invert(1)" : "none",
-                willChange: "transform, filter",
-                transition: "transform 500ms cubic-bezier(0.2,0.6,0.2,1), filter 400ms ease"
+                willChange: "transform, filter"
               }}
             />
           </span>
@@ -79,7 +92,7 @@ export default function Header() {
         </Link>
 
         {/* Right links + CTA (CTA visible on desktop only when scrolled) */}
-        <div className="hidden md:flex flex-1 items-center justify-start gap-8 pl-8">
+        <div className="hidden md:flex flex-1 items-center justify-start gap-6 pl-6">
           {["Projects", "About", "Contact"].map((item) => (
             <Link 
               key={item} 
@@ -107,7 +120,7 @@ export default function Header() {
         <Link
           href="/quote"
           prefetch
-          className="md:hidden absolute right-4 top-1/2 -translate-y-1/2 group overflow-hidden rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] px-3.5 py-1.5 text-[13px] font-semibold text-white shadow-[0_6px_18px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-lg"
+          className="md:hidden absolute right-3 top-1/2 -translate-y-1/2 group overflow-hidden rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] px-3 py-1.5 text-[12px] font-semibold text-white shadow-[0_6px_18px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-lg"
         >
           <span className="relative z-10">Get quote</span>
           <div className="absolute inset-0 bg-gradient-to-r from-[#47CE0C] via-white/30 to-[#CD1516] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"></div>

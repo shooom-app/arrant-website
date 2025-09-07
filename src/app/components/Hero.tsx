@@ -23,11 +23,11 @@ export default function Hero() {
 
       {/* Centered content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white pt-20 sm:pt-0">
-        <h1 className="relative group mx-auto max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-center sm:text-5xl lg:text-[52px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] animate-slideInLeft">
+        <h1 className="relative group mx-auto max-w-3xl text-4xl font-extrabold leading-snug sm:leading-snug lg:leading-[1.35] tracking-tight text-center sm:text-5xl lg:text-[52px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] animate-slideInLeft">
           Oversize & Overweight Transport — Delivered with Precision
           <span className="absolute -bottom-3 left-1/2 w-0 h-[2px] bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] rounded-full transform -translate-x-1/2 animate-underlineAppear animation-delay-600 opacity-70"></span>
         </h1>
-        <p className="relative group mt-3 max-w-2xl text-lg font-medium text-white/85 sm:text-xl animate-slideInLeft animation-delay-200">
+        <p className="relative group mt-3 max-w-2xl text-lg font-medium text-white/85 sm:text-[19px] leading-relaxed animate-slideInLeft animation-delay-200">
           Permits, routing, and safety—handled end-to-end.
           <span className="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] rounded-full transform -translate-x-1/2 animate-underlineAppear animation-delay-800 opacity-70"></span>
         </p>

@@ -1,3 +1,30 @@
+# Arrant Web
+
+## Scripts
+- `npm run dev` — start Next dev server
+- `npm run build` — production build
+- `npm run check` — lint + typecheck
+- `npm run test:security` — Playwright security header test
+
+## Stack
+- Next.js 15 (App Router), React 19, TypeScript, Tailwind
+- Path alias: `@/*` → `src/*`
+
+## Loader Behavior
+- Global boundary wraps pages; route-transition-only
+- Delay ~250ms, skip on fast nav via `requestIdleCallback`, 10s failsafe
+- Apple-smooth SVG fill, no %; reduced-motion shows static logo + fade
+
+## Brand Tokens (Tailwind)
+- `brand.red` `#CD1516`, `brand.green` `#47CE0C`, `brand.blue` `#0A84FF`
+- Neutrals: `charcoal`, `ink`, `paper`, `text`, `dim`
+
+## Home Composition
+Hero → TrustStrip → WhyArrant → CaseStudy → EquipmentSnapshot → FinalCTA
+
+## API
+- POST `/api/quote` (Zod, honeypot `website`, in-memory rate limit)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

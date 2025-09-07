@@ -23,7 +23,7 @@ export default function CaseStudy() {
               {/* Soft vignette */}
               <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(120%_80%_at_50%_40%,transparent_40%,rgba(0,0,0,0.45)_100%)]" />
               <Image
-                src="/case-study-placeholder.jpg"
+                src="/case-study-mobile.jpg"
                 alt="Oversize battery unit transport"
                 fill
                 className="object-cover"

@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Request a Quote — Arrant Solutions",
+  description: "Get a fast estimate range with permits, routing, and safety handled end-to-end.",
+};
+
 export default function Quote() {
   return (
     <div className="mx-auto max-w-wrap px-6 py-16">
