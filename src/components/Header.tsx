@@ -26,10 +26,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Ensure header is visible after mount; optionally could be used to add light entrance
+  // Ensure header is visible after mount and trigger entrance animation
   useEffect(() => {
     const reduced = prefersReducedMotion();
-    if (!reduced) requestAnimationFrame(() => setVisible(true));
+    if (reduced) {
+      setVisible(true);
+    } else {
+      // Trigger entrance animation after a brief delay
+      const timer = setTimeout(() => {
+        setVisible(true);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
 
     const onLoaderVisibility = (e: Event) => {
       const detail = (e as CustomEvent<{ show: boolean }>).detail;
@@ -56,7 +64,7 @@ export default function Header() {
         willChange: "opacity, transform"
       }}
     >
-      <nav className="relative mx-auto flex h-full max-w-7xl items-center justify-center pl-14 pr-14 md:px-6 md:py-4">
+      <nav className="relative mx-auto flex h-full max-w-7xl items-center justify-center pl-12 pr-12 md:px-6 md:py-4">
         {/* Mobile: hamburger (left) */}
         <button
           type="button"

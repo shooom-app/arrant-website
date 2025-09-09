@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "About — Arrant Solutions",
-  description: "Our story, team, and commitment to safe, reliable oversize transport.",
-};
+import { pageMeta } from "@/lib/seo";
 
 export default function Page() {
   return (
@@ -13,3 +9,11 @@ export default function Page() {
     </main>
   );
 }
+
+export const generateMetadata = (): Metadata =>
+  pageMeta({
+    title: "About Arrant Solutions | Heavy-Haul Logistics Team",
+    description:
+      "Expert, safety-first heavy-haul team with multi-state experience, permits, and escorts.",
+    pathname: "/about",
+  });

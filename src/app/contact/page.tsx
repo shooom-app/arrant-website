@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Contact — Arrant Solutions",
-  description: "Contact our 24/7 dispatch and project managers for quotes and support.",
-};
+import { pageMeta } from "@/lib/seo";
 
 export default function Page() {
   return (
@@ -13,3 +9,11 @@ export default function Page() {
     </main>
   );
 }
+
+export const generateMetadata = (): Metadata =>
+  pageMeta({
+    title: "Contact Arrant Solutions | Dispatch & Quotes",
+    description:
+      "Call or email dispatch for heavy-haul quotes, permits, escorts, and routing.",
+    pathname: "/contact",
+  });

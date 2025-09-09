@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Request a Quote — Arrant Solutions",
-  description: "Get a fast estimate range with permits, routing, and safety handled end-to-end.",
-};
+import { pageMeta } from "@/lib/seo";
 
 export default function Quote() {
   return (
@@ -26,3 +22,11 @@ export default function Quote() {
     </div>
   );
 }
+
+export const generateMetadata = (): Metadata =>
+  pageMeta({
+    title: "Request a Heavy-Haul Transportation Quote | Arrant Solutions",
+    description:
+      "Share dimensions, weight, and endpoints—get a same-day plan for permits, escorts, and routing.",
+    pathname: "/quote",
+  });

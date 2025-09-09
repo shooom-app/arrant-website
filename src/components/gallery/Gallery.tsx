@@ -27,7 +27,6 @@ export default function Gallery({
   className = ""
 }: GalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const reducedMotion = prefersReducedMotion();
 
@@ -41,19 +40,12 @@ export default function Gallery({
   }, [numImages]);
 
   const goToIndex = useCallback((newIndex: number) => {
-    if (numImages === 0 || isTransitioning) return;
-    
+    if (numImages === 0) return;
     const normalizedIndex = normalizeIndex(newIndex);
     if (normalizedIndex === currentIndex) return;
-
-    if (!reducedMotion) {
-      setIsTransitioning(true);
-      setTimeout(() => setIsTransitioning(false), 300);
-    }
-    
     setCurrentIndex(normalizedIndex);
     onIndexChange?.(normalizedIndex);
-  }, [currentIndex, normalizeIndex, numImages, isTransitioning, reducedMotion, onIndexChange]);
+  }, [currentIndex, normalizeIndex, numImages, onIndexChange]);
 
   const goNext = useCallback(() => goToIndex(currentIndex + 1), [currentIndex, goToIndex]);
   const goPrevious = useCallback(() => goToIndex(currentIndex - 1), [currentIndex, goToIndex]);
@@ -216,9 +208,7 @@ export default function Gallery({
             src={currentImage.src}
             alt={imageAlt}
             fill
-            className={`object-cover transition-opacity ${
-              reducedMotion ? "duration-0" : "duration-300 ease-in-out"
-            } ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+            className="object-cover"
             sizes="(min-width: 1024px) 80vw, 95vw"
             priority={currentIndex === 0}
             loading={currentIndex === 0 ? "eager" : "lazy"}
@@ -250,11 +240,20 @@ export default function Gallery({
         <div className="mt-3 sm:mt-4 flex items-center justify-center gap-3 sm:gap-4 px-4 sm:px-0">
           <button
             onClick={goPrevious}
-            disabled={isTransitioning}
-            className="inline-flex h-12 w-12 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/20 backdrop-blur-sm transition-all hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+            className="group relative overflow-hidden inline-flex h-12 w-12 sm:h-11 sm:w-11 items-center justify-center rounded-full text-white touch-manipulation focus:outline-none transition-transform duration-300 ease-out hover:scale-105 active:scale-95"
             aria-label="Previous photo"
+            style={{
+              background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)",
+              boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 8px 24px rgba(0,0,0,0.25)",
+              WebkitBackdropFilter: "blur(8px)",
+              backdropFilter: "blur(8px)"
+            }}
           >
-            <ChevronLeft size={20} className="sm:w-5 sm:h-5" />
+            {/* Gloss highlight */}
+            <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            {/* Sheen sweep */}
+            <span className="pointer-events-none absolute -inset-y-2 -left-1/2 h-[200%] w-1/3 rotate-[25deg] bg-white/25 blur-[6px] opacity-0 transition duration-700 ease-out group-hover:translate-x-[260%] group-hover:opacity-60" />
+            <ChevronLeft size={20} className="relative z-10 sm:w-5 sm:h-5 drop-shadow" />
           </button>
           
           <div className="text-xs sm:text-sm text-white/70 min-w-[60px] text-center" aria-live="polite" aria-atomic="true">
@@ -264,11 +263,18 @@ export default function Gallery({
           
           <button
             onClick={goNext}
-            disabled={isTransitioning}
-            className="inline-flex h-12 w-12 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/20 backdrop-blur-sm transition-all hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+            className="group relative overflow-hidden inline-flex h-12 w-12 sm:h-11 sm:w-11 items-center justify-center rounded-full text-white touch-manipulation focus:outline-none transition-transform duration-300 ease-out hover:scale-105 active:scale-95"
             aria-label="Next photo"
+            style={{
+              background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)",
+              boxShadow: "0 0 0 1px rgba(255,255,255,0.15) inset, 0 8px 24px rgba(0,0,0,0.25)",
+              WebkitBackdropFilter: "blur(8px)",
+              backdropFilter: "blur(8px)"
+            }}
           >
-            <ChevronRight size={20} className="sm:w-5 sm:h-5" />
+            <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <span className="pointer-events-none absolute -inset-y-2 -left-1/2 h-[200%] w-1/3 rotate-[25deg] bg-white/25 blur-[6px] opacity-0 transition duration-700 ease-out group-hover:translate-x-[260%] group-hover:opacity-60" />
+            <ChevronRight size={20} className="relative z-10 sm:w-5 sm:h-5 drop-shadow" />
           </button>
         </div>
       )}

@@ -34,8 +34,20 @@
 }
 
 .animate-slideInLeft {
-  animation: slideInLeft 0.8s ease-out forwards;
   opacity: 0;
+  transform: translateX(-100px);
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+/* Force animation restart - this ensures animations trigger on hydration */
+.animate-slideInLeft {
+  animation: none;
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.animate-slideInLeft.animate-slideInLeft {
+  animation: slideInLeft 0.8s ease-out forwards;
 }
 
 .animation-delay-200 {

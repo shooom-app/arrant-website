@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Trailers — Arrant Solutions",
-  description: "RGN, lowboy, stepdeck, and specialized heavy haul equipment.",
-};
+import { pageMeta } from "@/lib/seo";
 
 export default function Page() {
   return (
@@ -13,3 +9,11 @@ export default function Page() {
     </main>
   );
 }
+
+export const generateMetadata = (): Metadata =>
+  pageMeta({
+    title: "Lowboy & Specialized Trailer Services | Arrant Solutions",
+    description:
+      "Lowboy, gooseneck, and specialized equipment for heavy-haul moves—sized for complex loads.",
+    pathname: "/trailers",
+  });

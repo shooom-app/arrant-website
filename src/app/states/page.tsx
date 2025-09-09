@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "States — Arrant Solutions",
-  description: "Nationwide coverage with state-specific permits and regulations expertise.",
-};
+import { pageMeta } from "@/lib/seo";
 
 export default function Page() {
   return (
@@ -13,3 +9,11 @@ export default function Page() {
     </main>
   );
 }
+
+export const generateMetadata = (): Metadata =>
+  pageMeta({
+    title: "Oversize Load Transportation by State | Arrant Solutions",
+    description:
+      "State-by-state permits, escorts, and routing support across the U.S. for oversize and superload freight.",
+    pathname: "/states",
+  });

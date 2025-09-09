@@ -1,8 +1,36 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Set mounted state and force animation restart
+    setMounted(true);
+    
+    // Force animation restart after a brief delay
+    const timer = setTimeout(() => {
+      const elements = document.querySelectorAll('.animate-slideInLeft, .animate-underlineAppear');
+      elements.forEach(el => {
+        // Remove and re-add the class to force animation restart
+        const classList = el.classList;
+        if (classList.contains('animate-slideInLeft')) {
+          classList.remove('animate-slideInLeft');
+          el.offsetHeight; // Force reflow
+          classList.add('animate-slideInLeft');
+        }
+        if (classList.contains('animate-underlineAppear')) {
+          classList.remove('animate-underlineAppear');
+          el.offsetHeight; // Force reflow
+          classList.add('animate-underlineAppear');
+        }
+      });
+    }, 50);
+    
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <section className="relative h-screen w-full">
       {/* BG image */}
@@ -12,7 +40,7 @@ export default function Hero() {
         fill
         priority
         className="object-cover object-center md:object-[50%_45%] transition-transform duration-700 ease-out hover:scale-105"
-        sizes="100vw"
+        sizes="(min-width:1024px) 1200px, 100vw"
       />
 
       {/* Depth overlays */}
@@ -22,16 +50,16 @@ export default function Hero() {
       <div className="absolute inset-0 [mask-image:radial-gradient(70%_60%_at_50%_45%,black,transparent)] bg-black/30" />
 
       {/* Centered content */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white pt-20 sm:pt-0">
-        <h1 className="relative group mx-auto max-w-3xl text-4xl font-extrabold leading-snug sm:leading-snug lg:leading-[1.35] tracking-tight text-center sm:text-5xl lg:text-[52px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] animate-slideInLeft">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 sm:px-6 text-center text-white pt-24 sm:pt-0">
+        <h1 className={`relative group mx-auto max-w-3xl text-4xl font-extrabold leading-snug sm:leading-snug lg:leading-[1.35] tracking-tight text-center sm:text-5xl lg:text-[52px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] ${mounted ? 'animate-slideInLeft' : 'opacity-0'}`}>
           Oversize & Overweight Transport — Delivered with Precision
-          <span className="absolute -bottom-3 left-1/2 w-0 h-[2px] bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] rounded-full transform -translate-x-1/2 animate-underlineAppear animation-delay-600 opacity-70"></span>
+          <span className={`absolute -bottom-3 left-1/2 w-0 h-[2px] bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] rounded-full transform -translate-x-1/2 animation-delay-600 opacity-70 ${mounted ? 'animate-underlineAppear' : ''}`}></span>
         </h1>
-        <p className="relative group mt-3 max-w-2xl text-lg font-medium text-white/85 sm:text-[19px] leading-relaxed animate-slideInLeft animation-delay-200">
+        <p className={`relative group mt-3 max-w-2xl text-lg font-medium text-white/85 sm:text-[19px] leading-relaxed animation-delay-200 ${mounted ? 'animate-slideInLeft' : 'opacity-0'}`}>
           Permits, routing, and safety—handled end-to-end.
-          <span className="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] rounded-full transform -translate-x-1/2 animate-underlineAppear animation-delay-800 opacity-70"></span>
+          <span className={`absolute -bottom-2 left-1/2 w-0 h-[2px] bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] rounded-full transform -translate-x-1/2 animation-delay-800 opacity-70 ${mounted ? 'animate-underlineAppear' : ''}`}></span>
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-5 animate-slideInLeft animation-delay-400">
+        <div className={`mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-5 animation-delay-400 ${mounted ? 'animate-slideInLeft' : 'opacity-0'}`}>
           {/* Primary CTA with gradient sheen sweep */}
           <Link
             href="/quote"
