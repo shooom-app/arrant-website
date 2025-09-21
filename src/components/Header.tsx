@@ -1,10 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { prefersReducedMotion } from "@/lib/media";
 import { Menu, X, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Header() {
+  const pathname = usePathname() || "/";
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
   const [scrollProgress, setScrollProgress] = useState(0); // 0..1
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -71,13 +74,24 @@ export default function Header() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen ? "true" : "false"}
           onClick={() => setMenuOpen((v) => !v)}
-          className="md:hidden absolute left-4 top-1/2 -translate-y-1/2 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-white ring-1 ring-white/15 backdrop-blur-sm transition-all hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white/30"
+          className="md:hidden absolute left-4 top-1/2 -translate-y-1/2 inline-flex h-12 w-12 items-center justify-center text-white focus:outline-none"
         >
-          {menuOpen ? (
-            <X size={20} strokeWidth={2.25} className="transition-transform duration-200" />
-          ) : (
-            <Menu size={22} strokeWidth={2.25} className="transition-transform duration-200" />
-          )}
+          <span className="relative inline-flex items-center justify-center" aria-hidden="true">
+            <span
+              className="pointer-events-none absolute inset-0 rounded-full opacity-70 blur-[2px]"
+              style={{ background: "linear-gradient(90deg,#CD1516,rgba(255,255,255,.55),#47CE0C)", transform: "scale(1.08)" }}
+            />
+            <span className="relative block rounded-full bg-white/10 ring-1 ring-white/15" style={{ width: 44, height: 44 }}>
+              <span className="absolute inset-0 rounded-full bg-gradient-to-b from-white/10 to-white/0" />
+              <span className="relative flex h-full w-full items-center justify-center text-white/90">
+                {menuOpen ? (
+                  <X size={20} strokeWidth={2.25} className="transition-transform duration-200" />
+                ) : (
+                  <Menu size={22} strokeWidth={2.25} className="transition-transform duration-200" />
+                )}
+              </span>
+            </span>
+          </span>
         </button>
 
         {/* Left links (desktop only) */}
@@ -87,10 +101,11 @@ export default function Header() {
               key={item}
               href={`/${item.toLowerCase()}`}
               prefetch
+              aria-current={isActive(`/${item.toLowerCase()}`) ? "page" : undefined}
               className={`relative group transition-all duration-300 ease-out hover:translate-y-[-1px] ${scrolled ? "text-white/90" : "text-white"}`}
             >
               {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] transition-all duration-500 ease-out group-hover:w-full rounded-full"></span>
+              <span className={`absolute -bottom-1 left-0 ${isActive(`/${item.toLowerCase()}`) ? "w-full" : "w-0"} h-0.5 bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] transition-all duration-500 ease-out group-hover:w-full rounded-full`}></span>
             </Link>
           ))}
         </div>
@@ -127,10 +142,11 @@ export default function Header() {
               key={item} 
               href={`/${item.toLowerCase()}`} 
               prefetch
+              aria-current={isActive(`/${item.toLowerCase()}`) ? "page" : undefined}
               className={`relative group transition-all duration-300 ease-out hover:translate-y-[-1px] ${scrolled ? "text-white/90" : "text-white"}`}
             >
               {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] transition-all duration-500 ease-out group-hover:w-full rounded-full"></span>
+              <span className={`absolute -bottom-1 left-0 ${isActive(`/${item.toLowerCase()}`) ? "w-full" : "w-0"} h-0.5 bg-gradient-to-r from-[#CD1516] via-white/60 to-[#47CE0C] transition-all duration-500 ease-out group-hover:w-full rounded-full`}></span>
             </Link>
           ))}
           {scrolled && (
@@ -168,7 +184,8 @@ export default function Header() {
                   href={`/${item.toLowerCase()}`}
                   prefetch
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-between px-4 py-3 text-[15px] text-white transition-colors hover:bg-white/10"
+                  aria-current={isActive(`/${item.toLowerCase()}`) ? "page" : undefined}
+                  className={`flex items-center justify-between px-4 py-3 text-[15px] text-white transition-colors hover:bg-white/10 ${isActive(`/${item.toLowerCase()}`) ? "bg-white/10" : ""}`}
                 >
                   <span>{item}</span>
                   <ChevronRight size={18} className="text-white/70" />

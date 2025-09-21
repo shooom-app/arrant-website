@@ -11,7 +11,7 @@ export default function QuoteWizard() {
   const steps = useMemo(() => [
     { key: "route", label: "Route", fields: ["pickupAddress", "dropoffAddress", "readyDate"] as const },
     { key: "commodity", label: "Commodity", fields: ["commodity"] as const },
-    { key: "dimensions", label: "Dimensions", fields: ["length", "width", "height", "weight"] as const },
+    { key: "dimensions", label: "Dimensions", fields: ["length", "width", "weight"] as const },
     { key: "notes", label: "Notes", fields: ["notes"] as const },
     { key: "contact", label: "Contact", fields: ["contactName", "phone", "email"] as const },
   ], []);
@@ -79,10 +79,9 @@ export default function QuoteWizard() {
             <Input label="What are we hauling?" value={data.commodity || ""} onChange={(v) => update("commodity", v)} placeholder="e.g., 135,000 lbs battery unit" />
           )}
           {current.key === "dimensions" && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <Input label="Length (ft)" type="number" value={data.length?.toString() || ""} onChange={(v) => update("length", Number(v))} />
               <Input label="Width (ft)" type="number" value={data.width?.toString() || ""} onChange={(v) => update("width", Number(v))} />
-              <Input label="Height (ft)" type="number" value={data.height?.toString() || ""} onChange={(v) => update("height", Number(v))} />
               <Input label="Weight (lbs)" type="number" value={data.weight?.toString() || ""} onChange={(v) => update("weight", Number(v))} />
             </div>
           )}

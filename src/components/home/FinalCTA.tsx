@@ -29,11 +29,10 @@ export default function FinalCTA() {
             <Link
               href="/quote"
               prefetch
-              className="relative overflow-hidden rounded-xl bg-[#CD1516] px-5 py-3 text-white font-semibold shadow-lg shadow-black/30 transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30"
+              className="group relative overflow-hidden rounded-xl bg-[#CD1516] px-5 py-3 text-white font-semibold shadow-lg shadow-black/30 transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30"
             >
-              <span className="pointer-events-none absolute -inset-1 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    style={{ background: "linear-gradient(120deg, rgba(71,206,12,0.25), rgba(255,255,255,0.15), rgba(205,21,22,0.25))" }} />
-              <span className="relative">Get instant quote</span>
+              <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <span className="relative z-10">Get instant quote</span>
             </Link>
             <a
               href="tel:+1-000-000-0000"

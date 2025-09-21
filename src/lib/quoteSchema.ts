@@ -7,7 +7,6 @@ export const quoteSchema = z.object({
   commodity: z.string().min(2, "What are we hauling?"),
   length: z.coerce.number().positive("Length (ft)").max(200),
   width: z.coerce.number().positive("Width (ft)").max(30),
-  height: z.coerce.number().positive("Height (ft)").max(25),
   weight: z.coerce.number().positive("Weight (lbs)").max(500000),
   notes: z.string().max(1000).optional(),
   contactName: z.string().min(2, "Your name"),
