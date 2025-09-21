@@ -33,7 +33,7 @@ function IconPuck({ children }: { children: React.ReactNode }) {
 }
 
 const pillars: Pillar[] = [
-  { title: "Equipment", body: "Fit-for-purpose modern fleet up to 147,000 lbs, 120 ft length, 14 ft width.", Icon: (p) => <Truck {...p} /> },
+  { title: "Equipment", body: "Fit-for-purpose modern fleet up to 165,000 lbs, 143 ft length, 20 ft width.", Icon: (p) => <Truck {...p} /> },
   { title: "Crew", body: "Veteran heavy-haul drivers & project managers with 24/7 dispatch and updates.", Icon: (p) => <Users {...p} /> },
   { title: "Process", body: "In-house permitting, routing, pilot cars, and real-time tracking across states.", Icon: (p) => <Route {...p} /> },
   { title: "Safety", body: "FMCSA compliant, RMIS-verified, fully insured up to $5M. Zero-incident case studies.", Icon: (p) => <ShieldCheck {...p} /> },
@@ -56,7 +56,6 @@ export default function WhyArrant() {
               className="why-card relative overflow-hidden rounded-2xl bg-white/5 p-6 text-center ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)] focus:outline-none"
               style={{ "--chip-angle": "90deg" } as React.CSSProperties}
             >
-              <span className="why-hairline pointer-events-none absolute inset-x-0 -top-px h-[2px]" />
               <span className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-[0.10] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)] blur-[6px]" />
 
               {/* Row 1: centered icon puck */}
@@ -76,10 +75,7 @@ export default function WhyArrant() {
         </div>
       </div>
       <style jsx global>{`
-        @keyframes arrantHairline { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
-        .why-hairline { background-image: linear-gradient(90deg,#CD1516 0%,rgba(255,255,255,.55) 50%,#47CE0C 100%); background-size:200% 100%; animation:arrantHairline 6s linear infinite; opacity:.9 }
         .why-card { border-radius:1rem; --brand-red:#CD1516; --brand-green:#47CE0C; --chip-angle:90deg }
-        @media (prefers-reduced-motion: reduce) { .why-hairline { animation-duration: 12s } }
 
         /* Brand chip styling aligned with icon halo */
         .brand-chip {

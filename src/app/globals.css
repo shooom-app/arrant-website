@@ -39,15 +39,11 @@
   animation: slideInLeft 0.8s ease-out forwards;
 }
 
-/* Force animation restart - this ensures animations trigger on hydration */
-.animate-slideInLeft {
-  animation: none;
-  opacity: 0;
-  transform: translateX(-100px);
-}
-
-.animate-slideInLeft.animate-slideInLeft {
-  animation: slideInLeft 0.8s ease-out forwards;
+/* Hydration gate: keep animations paused until AnimGate sets data-anim-ready=1 */
+:root:not([data-anim-ready="1"]) .animate-slideInLeft,
+:root:not([data-anim-ready="1"]) .animate-underlineAppear {
+  animation: none !important;
+  opacity: 0 !important;
 }
 
 .animation-delay-200 {

@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { prefersReducedMotion } from "@/lib/media";
 
 export interface GalleryImage {
   src: string;
@@ -28,7 +27,6 @@ export default function Gallery({
 }: GalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const reducedMotion = prefersReducedMotion();
 
   const numImages = images.length;
   const hasMultipleImages = numImages > 1;

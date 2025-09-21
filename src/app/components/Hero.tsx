@@ -13,17 +13,20 @@ export default function Hero() {
     // Force animation restart after a brief delay
     const timer = setTimeout(() => {
       const elements = document.querySelectorAll('.animate-slideInLeft, .animate-underlineAppear');
-      elements.forEach(el => {
+      elements.forEach((el) => {
+        if (!(el instanceof HTMLElement)) {
+          return;
+        }
         // Remove and re-add the class to force animation restart
         const classList = el.classList;
         if (classList.contains('animate-slideInLeft')) {
           classList.remove('animate-slideInLeft');
-          el.offsetHeight; // Force reflow
+          void el.offsetHeight; // Force reflow
           classList.add('animate-slideInLeft');
         }
         if (classList.contains('animate-underlineAppear')) {
           classList.remove('animate-underlineAppear');
-          el.offsetHeight; // Force reflow
+          void el.offsetHeight; // Force reflow
           classList.add('animate-underlineAppear');
         }
       });

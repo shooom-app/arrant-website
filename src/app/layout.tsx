@@ -5,6 +5,7 @@ import BackgroundFX from "@/app/components/BackgroundFX";
 import Footer from "@/components/Footer";
 import "@fontsource-variable/inter";
 import LoaderBoundary from "@/components/loader/LoaderBoundary";
+import AnimGate from "@/app/components/AnimGate";
 // import ActionBar from "@/components/ActionBar";
 // import StickyQuoteCTA from "@/components/StickyQuoteCTA";
 // import SmokeyBackground from "@/components/SmokeyBackground";
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="min-h-screen bg-transparent text-brand-text antialiased overflow-x-hidden">
         <BackgroundFX />
+        <AnimGate />
         <Header />
         <LoaderBoundary variant="svg">
           <main>{children}</main>

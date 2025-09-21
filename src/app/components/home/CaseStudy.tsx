@@ -17,8 +17,6 @@ export default function CaseStudy() {
         <div className="mt-8 grid items-stretch gap-6 md:grid-cols-2">
           {/* Media card */}
           <div className="relative overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/20">
-            {/* Animated gradient hairline (reuse global) */}
-            <span className="why-hairline pointer-events-none absolute inset-x-0 -top-px h-[2px]" />
             <div className="relative aspect-[16/10] w-full">
               {/* Soft vignette */}
               <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(120%_80%_at_50%_40%,transparent_40%,rgba(0,0,0,0.45)_100%)]" />
@@ -35,8 +33,6 @@ export default function CaseStudy() {
 
           {/* Details card */}
           <article className="relative rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 transition hover:ring-white/20 sm:p-8">
-            {/* Animated gradient hairline */}
-            <span className="why-hairline pointer-events-none absolute inset-x-0 -top-px h-[2px]" />
 
             {/* Header row: KPI chips + tag */}
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -75,7 +71,7 @@ export default function CaseStudy() {
         </div>
       </div>
 
-      {/* Local micro-motion for the progress line; hairline styles are provided globally by WhyArrant */}
+      {/* Local micro-motion for the progress line */}
       <style jsx>{`
         @keyframes csProgress {
           0% { transform: translateX(-120%) }

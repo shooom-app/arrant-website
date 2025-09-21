@@ -52,7 +52,7 @@ const pillars: Pillar[] = [
     chip: "Capacity",
     title: "Equipment",
     body:
-      "Fit-for-purpose modern fleet up to 147,000 lbs, 120 ft length, 14 ft width.",
+      "Fit-for-purpose modern fleet up to 165,000 lbs, 143 ft length, 20 ft width.",
     proofs: ["13-axle / 9-axle", "Perimeter & lowboy"],
     Icon: IconEquipment,
   },
@@ -102,8 +102,6 @@ export default function WhyArrant() {
                          transition will-change-transform hover:-translate-y-0.5 hover:bg-white/8 hover:ring-white/20
                          hover:shadow-[0_16px_60px_rgba(0,0,0,0.35)]"
             >
-              {/* animated hairline */}
-              <span className="why-hairline pointer-events-none absolute inset-x-0 -top-px h-[2px]" />
 
               <div className="mb-3 flex items-center justify-between">
                 {/* gradient chip (hero primary vibe) */}
@@ -139,18 +137,8 @@ export default function WhyArrant() {
         </div>
       </div>
 
-      {/* Scoped CSS for animated hairline + small polish */}
+      {/* Scoped CSS for small polish */}
       <style jsx global>{`
-        @keyframes arrantHairline {
-          0%   { background-position: 0% 50%; }
-          100% { background-position: 200% 50%; }
-        }
-        .why-hairline {
-          background-image: linear-gradient(90deg, #CD1516 0%, rgba(255,255,255,0.55) 50%, #47CE0C 100%);
-          background-size: 200% 100%;
-          animation: arrantHairline 6s linear infinite;
-          opacity: 0.9;
-        }
         .why-card {
           /* keep edges super-smooth */
           border-radius: 1rem;

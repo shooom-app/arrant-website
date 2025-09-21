@@ -59,7 +59,6 @@ export default function CaseStudy() {
           <article
             className="relative overflow-hidden rounded-2xl bg-white/5 p-6 text-center ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)] sm:p-8"
           >
-            <span className="why-hairline pointer-events-none absolute inset-x-0 -top-px h-[2px]" />
             <span className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-[0.10] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)] blur-[6px]" />
 
             {/* Icon */}
@@ -122,12 +121,6 @@ export default function CaseStudy() {
       </div>
 
       <style jsx global>{`
-        /* Gradient hairline identical to Why Arrant; disable animation on mobile */
-        @keyframes arrantHairline { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
-        .why-hairline { background-image: linear-gradient(90deg,#CD1516 0%, rgba(255,255,255,.55) 50%, #47CE0C 100%); background-size:200% 100%; animation:arrantHairline 6s linear infinite; opacity:.9 }
-        @media (max-width: 480px) { .why-hairline { animation: none } }
-        @media (prefers-reduced-motion: reduce) { .why-hairline { animation: none } }
-
         /* ----- On-scroll reveal states ----- */
         .cs-root .cs-header { opacity: 0; transform: translateY(12px); transition: opacity 360ms cubic-bezier(.2,.6,.2,1), transform 360ms cubic-bezier(.2,.6,.2,1) }
         .cs-root .cs-media { opacity: 0; transform: scale(.985); filter: blur(2px); transition: opacity 500ms ease-out, transform 500ms ease-out, filter 500ms ease-out }
