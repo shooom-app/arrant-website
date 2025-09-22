@@ -122,9 +122,7 @@ export default function ServicesPage() {
           Plan your heavy haul with the team that moves 100k–165k lb freight every week.
               </h2>
         <div className="mx-auto mt-4 h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
-        <p className="mt-3 text-white/80">
-          Permits, routing, and escorts handled end-to-end—24/7 dispatch.
-        </p>
+        {/* Removed per request */}
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="/quote"
@@ -139,7 +137,7 @@ export default function ServicesPage() {
             className="group relative overflow-hidden rounded-lg border border-white/35 bg-white/25 px-5 py-3 font-semibold text-white backdrop-blur-sm transition-all duration-500 ease-out hover:bg-white/35 hover:scale-[1.03] hover:shadow-[0_0_0_2px_rgba(205,21,22,0.25),0_0_0_4px_rgba(71,206,12,0.25)] focus:outline-none focus:ring-2 focus:ring-white/30"
             aria-label="Call dispatch"
           >
-            <span className="relative z-10">Call Dispatch</span>
+            <span className="relative z-10">Call now</span>
             <div className="absolute inset-0 bg-gradient-to-r from-[#CD1516]/10 via-white/10 to-[#47CE0C]/10 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"></div>
           </a>
           </div>
