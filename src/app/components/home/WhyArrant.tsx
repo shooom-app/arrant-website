@@ -60,7 +60,7 @@ const pillars: Pillar[] = [
     chip: "Experience",
     title: "People",
     body:
-      "Veteran heavy-haul drivers & project managers with 24/7 dispatch and updates.",
+      "Veteran heavy-haul drivers & project managers.",
     proofs: ["Battery hazard trained", "Operator-first culture"],
     Icon: IconPeople,
   },

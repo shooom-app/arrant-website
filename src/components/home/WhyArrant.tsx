@@ -34,7 +34,7 @@ function IconPuck({ children }: { children: React.ReactNode }) {
 
 const pillars: Pillar[] = [
   { title: "Equipment", body: "Fit-for-purpose modern fleet up to 165,000 lbs, 143 ft length, 20 ft width.", Icon: (p) => <Truck {...p} /> },
-  { title: "Crew", body: "Veteran heavy-haul drivers & project managers with 24/7 dispatch and updates.", Icon: (p) => <Users {...p} /> },
+  { title: "Crew", body: "Veteran heavy-haul drivers & project managers.", Icon: (p) => <Users {...p} /> },
   { title: "Process", body: "In-house permitting, routing, pilot cars, and real-time tracking across states.", Icon: (p) => <Route {...p} /> },
   { title: "Safety", body: "FMCSA compliant, RMIS-verified, fully insured up to $5M. Zero-incident case studies.", Icon: (p) => <ShieldCheck {...p} /> },
 ];
