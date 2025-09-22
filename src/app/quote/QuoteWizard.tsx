@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import { quoteSchema, type QuoteForm } from "@/lib/quoteSchema";
+import Link from "next/link";
 import { z } from "zod";
 
 export default function QuoteWizard() {
@@ -96,10 +97,10 @@ export default function QuoteWizard() {
               You have successfully submitted your quote request. Our team will contact you shortly.
             </div>
             <div className="mt-6 flex items-center justify-center">
-              <a href="/" className="group relative overflow-hidden rounded-xl bg-[#CD1516] px-5 py-2.5 font-semibold text-white shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30">
+              <Link href="/" className="group relative overflow-hidden rounded-xl bg-[#CD1516] px-5 py-2.5 font-semibold text-white shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30">
                 <span className="relative z-10">Back to Home</span>
                 <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              </a>
+              </Link>
             </div>
           </div>
         ) : (
