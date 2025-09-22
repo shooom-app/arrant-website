@@ -15,7 +15,7 @@ import { LocalBusinessJSONLD, ServicesItemListJSONLD } from "@/lib/jsonld";
 const galleryImages = [
   { src: "/gallery-1.jpg", alt: "Arrant Solutions heavy haul transport" },
   { src: "/gallery-2.jpg", alt: "Crane operation with transport equipment" },
-  { src: "/gallery-3.jpg", alt: "Industrial spool transport on trailer" },
+  // Removed 3rd photo per request
   { src: "/gallery-4.jpg", alt: "Arrant fleet hauling oversize load" },
   { src: "/gallery-5.jpg", alt: "Oversize load transport on site" },
   { src: "/gallery-6.jpg", alt: "Arrant transport operation at night" },

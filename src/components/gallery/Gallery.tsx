@@ -211,6 +211,26 @@ export default function Gallery({
             priority={currentIndex === 0}
             loading={currentIndex === 0 ? "eager" : "lazy"}
           />
+
+          {/* Click zones: left = previous, right = next */}
+          {hasMultipleImages && (
+            <>
+              <button
+                type="button"
+                aria-label="Previous photo"
+                onClick={goPrevious}
+                className="absolute inset-y-0 left-0 w-1/2 cursor-pointer focus:outline-none"
+                style={{ background: "transparent" }}
+              />
+              <button
+                type="button"
+                aria-label="Next photo"
+                onClick={goNext}
+                className="absolute inset-y-0 right-0 w-1/2 cursor-pointer focus:outline-none"
+                style={{ background: "transparent" }}
+              />
+            </>
+          )}
         </div>
 
         {/* Caption overlay - responsive positioning */}
