@@ -1,11 +1,24 @@
+/**
+ * Quote API hardening
+ * - Payload cap: reject content-length > 100KB to prevent resource abuse
+ * - Rate limiting: basic per-IP limiter (10 req/min) from lib
+ * - Redacted logging: use logInfo so emails/phones never appear in logs
+ */
 import { NextResponse } from "next/server";
 import { rateLimit, ipFromHeaders } from "@/lib/rateLimit";
 import { quoteSchema } from "@/lib/quoteSchema";
+import { logInfo } from "@/lib/security/logger";
 
 export async function POST(req: Request) {
   const ip = ipFromHeaders(req.headers);
   if (!rateLimit(ip)) {
     return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });
+  }
+
+  // Payload cap – avoid large-body abuse before attempting to parse JSON
+  const len = Number(req.headers.get("content-length") || "0");
+  if (Number.isFinite(len) && len > 100_000) {
+    return NextResponse.json({ ok: false, error: "Payload too large" }, { status: 413 });
   }
 
   let body: unknown = {};
@@ -29,12 +42,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: parsed.error.flatten() }, { status: 400 });
   }
 
-  // Minimal, non-sensitive logging
-  console.log("QUOTE REQUEST", {
+  // Minimal, redacted logging (emails/phones scrubbed; long payloads truncated)
+  logInfo("QUOTE REQUEST", {
     ip,
     pickup: parsed.data.pickupAddress,
     dropoff: parsed.data.dropoffAddress,
-    weight: parsed.data.weight
+    weight: parsed.data.weight,
   });
 
   // TODO: email/CRM integration (keep keys in .env.local)

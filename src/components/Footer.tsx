@@ -13,8 +13,28 @@ export default function Footer() {
             Locations
           </div>
           <ul className="mt-2 text-neutral-300 space-y-1">
-            <li className="transition-all duration-300 ease-out hover:text-white hover:translate-x-1">Brighton, CO — 880 N 9th Ave Unit B</li>
-            <li className="transition-all duration-300 ease-out hover:text-white hover:translate-x-1">Williston, ND — 13831 60th St NW</li>
+            <li>
+              <a
+                href="https://share.google/HVA5Bl1OkURMvLCCS"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-all duration-300 ease-out hover:text-white hover:translate-x-1"
+                aria-label="Open Brighton, CO in Google Maps"
+              >
+                Brighton, CO — 880 N 9th Ave Unit B
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://share.google/roFFxhRdOJvtUoXVL"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-all duration-300 ease-out hover:text-white hover:translate-x-1"
+                aria-label="Open Williston, ND in Google Maps"
+              >
+                Williston, ND — 13831 60th St NW
+              </a>
+            </li>
           </ul>
         </div>
         <div>

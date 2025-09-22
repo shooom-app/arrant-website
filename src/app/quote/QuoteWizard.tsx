@@ -8,6 +8,7 @@ export default function QuoteWizard() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<Partial<QuoteForm>>({});
+  const [submitted, setSubmitted] = useState(false);
 
   const steps = useMemo(() => [
     { key: "route", label: "Route", fields: ["pickupAddress", "dropoffAddress"] as const },
@@ -68,7 +69,8 @@ export default function QuoteWizard() {
       const res = await fetch("/api/quote", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...parsed.data, website: "" }) });
       const j = await res.json().catch(() => ({}));
       if (!res.ok || j?.ok === false) throw new Error("Request failed");
-      setStep(total - 1);
+      // Success: show confirmation message
+      setSubmitted(true);
     } catch {
       setError("Could not submit right now. Please try again.");
     } finally {
@@ -87,8 +89,21 @@ export default function QuoteWizard() {
       <section className="relative overflow-hidden rounded-3xl p-6 sm:p-8 ring-1 ring-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.35)] bg-neutral-900/60 backdrop-blur-sm">
         <div className="pointer-events-none absolute -inset-8 opacity-[0.10] bg-[radial-gradient(70%_60%_at_70%_20%,#47CE0C_0%,transparent_70%),radial-gradient(60%_60%_at_20%_80%,#CD1516_0%,transparent_70%)]" />
         <h1 className="relative z-10 text-center text-2xl font-bold text-white">Request a Quote</h1>
-        <p className="relative z-10 mt-2 text-center text-white/85">Answer a few quick questions. We’ll prepare a same‑day plan.</p>
-        <div className="relative z-10 mt-6 grid gap-4">
+        <p className="relative z-10 mt-2 text-center text-white/85">Answer a few quick questions. We’ll prepare a plan.</p>
+        {submitted ? (
+          <div className="relative z-10 mt-6">
+            <div className="rounded-xl bg-green-500/10 px-4 py-3 text-green-300 ring-1 ring-green-500/30">
+              You have successfully submitted your quote request. Our team will contact you shortly.
+            </div>
+            <div className="mt-6 flex items-center justify-center">
+              <a href="/" className="group relative overflow-hidden rounded-xl bg-[#CD1516] px-5 py-2.5 font-semibold text-white shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30">
+                <span className="relative z-10">Back to Home</span>
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </a>
+            </div>
+          </div>
+        ) : (
+          <div className="relative z-10 mt-6 grid gap-4">
           {current.key === "route" && (<>
             <Input label="Pickup address" value={data.pickupAddress || ""} onChange={(v) => update("pickupAddress", v)} placeholder="123 Main St, Denver CO" />
             <Input label="Drop-off address" value={data.dropoffAddress || ""} onChange={(v) => update("dropoffAddress", v)} placeholder="456 Ave, Houston TX" />
@@ -112,21 +127,24 @@ export default function QuoteWizard() {
             <Input label="Email" type="email" value={data.email || ""} onChange={(v) => update("email", v)} />
           </>)}
           {error && <div className="mt-1 rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-300 ring-1 ring-red-500/30">{error}</div>}
-        </div>
-        <div className="relative z-10 mt-6 flex items-center justify-between">
-          <button onClick={back} disabled={step === 0 || submitting} className="rounded-xl px-4 py-2 text-white/90 ring-1 ring-white/15 hover:bg-white/10 disabled:opacity-50">Back</button>
-          {step < total - 1 ? (
-            <button onClick={next} disabled={submitting} className="group relative overflow-hidden rounded-xl bg-[#CD1516] px-5 py-2.5 font-semibold text-white shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30">
-              <span className="relative z-10">Next</span>
-              <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </button>
-          ) : (
-            <button onClick={submit} disabled={submitting} className="group relative overflow-hidden rounded-xl bg-[#47CE0C] px-5 py-2.5 font-semibold text-black shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30">
-              <span className="relative z-10">Request Quote</span>
-              <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/10 via-white/40 to-black/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </button>
-          )}
-        </div>
+          </div>
+        )}
+        {!submitted && (
+          <div className="relative z-10 mt-6 flex items-center justify-between">
+            <button onClick={back} disabled={step === 0 || submitting} className="rounded-xl px-4 py-2 text-white/90 ring-1 ring-white/15 hover:bg-white/10 disabled:opacity-50">Back</button>
+            {step < total - 1 ? (
+              <button onClick={next} disabled={submitting} className="group relative overflow-hidden rounded-xl bg-[#CD1516] px-5 py-2.5 font-semibold text-white shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30">
+                <span className="relative z-10">Next</span>
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </button>
+            ) : (
+              <button onClick={submit} disabled={submitting} className="group relative overflow-hidden rounded-xl bg-[#47CE0C] px-5 py-2.5 font-semibold text-black shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30">
+                <span className="relative z-10">Request Quote</span>
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/10 via-white/40 to-black/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </button>
+            )}
+          </div>
+        )}
       </section>
       <style jsx global>{`
         /* Hide spin buttons on number inputs (length/width/weight) */
