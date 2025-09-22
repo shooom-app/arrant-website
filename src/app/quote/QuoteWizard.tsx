@@ -9,7 +9,7 @@ export default function QuoteWizard() {
   const [data, setData] = useState<Partial<QuoteForm>>({});
 
   const steps = useMemo(() => [
-    { key: "route", label: "Route", fields: ["pickupAddress", "dropoffAddress", "readyDate"] as const },
+    { key: "route", label: "Route", fields: ["pickupAddress", "dropoffAddress"] as const },
     { key: "commodity", label: "Commodity", fields: ["commodity"] as const },
     { key: "dimensions", label: "Dimensions", fields: ["length", "width", "weight"] as const },
     { key: "notes", label: "Notes", fields: ["notes"] as const },
@@ -73,7 +73,6 @@ export default function QuoteWizard() {
           {current.key === "route" && (<>
             <Input label="Pickup address" value={data.pickupAddress || ""} onChange={(v) => update("pickupAddress", v)} placeholder="123 Main St, Denver CO" />
             <Input label="Drop-off address" value={data.dropoffAddress || ""} onChange={(v) => update("dropoffAddress", v)} placeholder="456 Ave, Houston TX" />
-            <Input label="Ready date" type="date" value={data.readyDate || ""} onChange={(v) => update("readyDate", v)} />
           </>)}
           {current.key === "commodity" && (
             <Input label="What are we hauling?" value={data.commodity || ""} onChange={(v) => update("commodity", v)} placeholder="e.g., 135,000 lbs battery unit" />

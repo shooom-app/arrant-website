@@ -9,6 +9,7 @@ export default function Page() {
     <main className="relative z-10 min-h-screen">
       <section className="mx-auto max-w-5xl px-4 pt-28 pb-10 text-center sm:pt-32">
         <h1 className="text-3xl font-bold text-white sm:text-4xl">At Arrant Solutions, we let our results speak for us.</h1>
+        <div className="mx-auto mt-4 h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
         <p className="mt-3 text-white/85">Here is a recent project study:</p>
       </section>
 

@@ -42,6 +42,7 @@ export default function Home() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Recent Moves & Capabilities
               </h2>
+              <div className="mx-auto h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
               <p className="text-sm sm:text-lg text-white/80 max-w-2xl mx-auto px-3 sm:px-0">
                 See our fleet in action handling complex oversize and overweight transports, heavy lifting operations, and specialized equipment moves across the country.
               </p>

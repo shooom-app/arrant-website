@@ -22,6 +22,7 @@ export default function FinalCTA() {
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Ready to move your next oversize load?
           </h2>
+          <div className="mx-auto mt-4 h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
           <p className="mt-2 text-white/85">
             Partner with the heavy-haul experts trusted by energy and industry leaders.
           </p>

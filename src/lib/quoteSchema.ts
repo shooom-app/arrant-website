@@ -3,7 +3,6 @@ import { z } from "zod";
 export const quoteSchema = z.object({
   pickupAddress: z.string().min(5, "Enter full pickup address"),
   dropoffAddress: z.string().min(5, "Enter full drop-off address"),
-  readyDate: z.string().min(1, "Select a date"),
   commodity: z.string().min(2, "What are we hauling?"),
   length: z.coerce.number().positive("Length (ft)").max(200),
   width: z.coerce.number().positive("Width (ft)").max(30),

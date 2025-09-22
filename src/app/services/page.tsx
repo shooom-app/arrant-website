@@ -42,6 +42,7 @@ export default function ServicesPage() {
         <h1 className="text-3xl font-bold text-white sm:text-4xl">
           At Arrant Solutions, we are specialized to move oversized freight in the 100,000–165,000 lb range.
         </h1>
+        <div className="mx-auto mt-4 h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="/quote"
@@ -67,6 +68,7 @@ export default function ServicesPage() {
       {/* Specialization */}
       <section id="specialization" className="mx-auto max-w-7xl px-4 py-10 text-center sm:py-12 scroll-mt-28 sm:scroll-mt-32">
         <h2 className="text-2xl font-bold text-white sm:text-3xl">Heavy Haul Specialization</h2>
+        <div className="mx-auto mt-4 h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
         <div className="mx-auto mt-6 grid max-w-5xl gap-4 sm:grid-cols-2">
           {/* Card 1 */}
           <article className="relative overflow-hidden rounded-2xl bg-white/5 p-6 text-center ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)]">
@@ -119,6 +121,7 @@ export default function ServicesPage() {
         <h2 className="text-2xl font-bold text-white sm:text-3xl">
           Plan your heavy haul with the team that moves 100k–165k lb freight every week.
               </h2>
+        <div className="mx-auto mt-4 h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
         <p className="mt-3 text-white/80">
           Permits, routing, and escorts handled end-to-end—24/7 dispatch.
         </p>

@@ -8,6 +8,7 @@ export default function Page() {
     <main className="relative z-10 min-h-screen">
       <section className="mx-auto max-w-7xl px-4 pt-28 pb-10 text-center sm:pt-32">
         <h1 className="text-3xl font-bold text-white sm:text-4xl">Our Specialized Trailers</h1>
+        <div className="mx-auto mt-4 h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
         <p className="mt-3 text-white/85">Every load has its own challenges. That’s why we operate a fleet of specialized trailers designed to move oversized and heavy freight safely, efficiently, and legally across the country.</p>
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href="/quote" className="group relative overflow-hidden rounded-lg bg-[#CD1516] px-5 py-3 font-semibold text-white shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30" aria-label="Get a trailer recommendation">
@@ -29,6 +30,7 @@ export default function Page() {
 
       <section className="mx-auto max-w-5xl px-4 py-16 text-center sm:py-20">
         <h2 className="text-2xl font-bold text-white sm:text-3xl">Plan your heavy haul with the right trailer</h2>
+        <div className="mx-auto mt-4 h-[2px] w-36 rounded-full bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-80" />
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href="/quote" className="group relative overflow-hidden rounded-lg bg-[#CD1516] px-5 py-3 font-semibold text-white shadow-sm transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30" aria-label="Get a trailer recommendation">
             <span className="relative z-10">Get a Trailer Recommendation</span>
