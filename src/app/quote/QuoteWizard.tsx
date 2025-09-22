@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import { quoteSchema, type QuoteForm } from "@/lib/quoteSchema";
+import { z } from "zod";
 
 export default function QuoteWizard() {
   const [step, setStep] = useState(0);
@@ -26,7 +27,25 @@ export default function QuoteWizard() {
   async function next() {
     setError(null);
     const partial = Object.fromEntries(current.fields.map((f) => [f, data[f]]));
-    const perStepShape = quoteSchema.pick(Object.fromEntries(current.fields.map((f) => [f, true])) as Record<keyof QuoteForm, true>);
+
+    // Step-level lightweight validation (allow broader ranges; stricter checks on submit)
+    const stepFieldSchema: Record<keyof QuoteForm, z.ZodTypeAny> = {
+      pickupAddress: z.string().min(5),
+      dropoffAddress: z.string().min(5),
+      commodity: z.string().min(2),
+      length: z.coerce.number().positive(),
+      width: z.coerce.number().positive(),
+      weight: z.coerce.number().positive(),
+      notes: z.string().max(1000).optional(),
+      contactName: z.string().min(2),
+      phone: z.string().min(7),
+      email: z.string().email(),
+    };
+
+    const perStepShape = z.object(
+      Object.fromEntries(current.fields.map((f) => [f, stepFieldSchema[f]])) as Record<string, z.ZodTypeAny>
+    );
+
     const parsed = perStepShape.safeParse(partial);
     if (!parsed.success) {
       setError("Please complete the required fields");
@@ -58,7 +77,7 @@ export default function QuoteWizard() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-10 sm:py-14">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 pt-28 pb-12 sm:pt-32 sm:pb-16">
       <div className="mx-auto mb-6 flex items-center justify-center gap-2">
         {steps.map((s, i) => (
           <div key={s.key} className={`h-2 rounded-full transition-all ${i <= step ? "bg-white/70" : "bg-white/20"}`} style={{ width: i === step ? 56 : 28 }} />
@@ -109,6 +128,12 @@ export default function QuoteWizard() {
           )}
         </div>
       </section>
+      <style jsx global>{`
+        /* Hide spin buttons on number inputs (length/width/weight) */
+        input.no-spin::-webkit-outer-spin-button,
+        input.no-spin::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input.no-spin[type=number] { -moz-appearance: textfield; appearance: textfield; }
+      `}</style>
     </div>
   );
 }
@@ -118,7 +143,8 @@ function Input({ label, type = "text", value, onChange, placeholder }: { label: 
     <label className="grid gap-1.5">
       <span className="text-sm text-white/80">{label}</span>
       <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
-             className="rounded-xl bg-white/5 px-3 py-2 text-white ring-1 ring-white/10 placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/30" />
+             className={`rounded-xl bg-white/5 px-3 py-2 text-white ring-1 ring-white/10 placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 ${type === 'number' ? 'no-spin' : ''}`}
+      />
     </label>
   );
 }

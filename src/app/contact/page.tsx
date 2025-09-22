@@ -30,7 +30,7 @@ export default function Page() {
           <article className="relative overflow-hidden rounded-2xl bg-white/5 p-6 text-center ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)]">
             <span className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-[0.10] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)] blur-[6px]" />
             <div className="relative z-10">
-              <div className="mb-3 flex justify-center">
+              <div className="mb-5 flex justify-center">
                 <IconPuck>
                   <FileText width={20} height={20} strokeWidth={2} className="text-white/90" />
                 </IconPuck>
@@ -50,7 +50,7 @@ export default function Page() {
           <article className="relative overflow-hidden rounded-2xl bg-white/5 p-6 text-center ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)]">
             <span className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-[0.10] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)] blur-[6px]" />
             <div className="relative z-10">
-              <div className="mb-3 flex justify-center">
+              <div className="mb-5 flex justify-center">
                 <IconPuck>
                   <Mail width={20} height={20} strokeWidth={2} className="text-white/90" />
                 </IconPuck>
@@ -70,7 +70,7 @@ export default function Page() {
           <article className="relative overflow-hidden rounded-2xl bg-white/5 p-6 text-center ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.35)]">
             <span className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-[0.10] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)] blur-[6px]" />
             <div className="relative z-10">
-              <div className="mb-3 flex justify-center">
+              <div className="mb-5 flex justify-center">
                 <IconPuck>
                   <Phone width={20} height={20} strokeWidth={2} className="text-white/90" />
                 </IconPuck>

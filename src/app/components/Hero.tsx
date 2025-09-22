@@ -67,12 +67,10 @@ export default function Hero() {
           <Link
             href="/quote"
             prefetch
-            className="group relative overflow-hidden rounded-lg bg-transparent px-6 py-3 text-lg font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-500 ease-out hover:scale-[1.05] hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] focus:outline-none focus:ring-2 focus:ring-white/30]"
+            className="group relative overflow-hidden rounded-lg bg-[#CD1516] px-6 py-3 text-lg font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/30"
           >
-            <span className="pointer-events-none absolute inset-0 z-0 rounded-lg opacity-85 blur-[2px] [background:linear-gradient(90deg,#CD1516,rgba(255,255,255,.45),#47CE0C)]" />
-            <span className="relative z-20">Get instant quote</span>
-            <div className="pointer-events-none absolute inset-0 z-0 rounded-lg bg-gradient-to-r from-[#47CE0C] via-[rgba(255,255,255,.45)] to-[#CD1516] opacity-0 blur-[2px] transition-all duration-500 ease-out group-hover:opacity-85"></div>
-            
+            <span className="relative z-10">Get instant quote</span>
+            <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#CD1516] via-white/30 to-[#47CE0C] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </Link>
           
           {/* Secondary CTA with glass background and twin brand ring shadow */}
